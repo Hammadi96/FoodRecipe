@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: header(page_title='Search Results')"></div>
+<body>
+<nav th:replace="fragments/header :: navbar"/>
+
+<div class="container" th:if="${recipes}">
+
+    <div class="card" th:each="recipe : ${recipes}">
+        <div class="card-header">
+            <i class="far fa-clock"></i> <span class="cooking-time" th:text="${recipe.cookingTime} + ' minutes'"/>
+
+            <i class="fas fa-utensils"></i> <span class="servings" th:text="${recipe.servings} + ' people'"/>
+
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                <a th:href="@{'/view/recipe/' + ${recipe.id}}" th:text="${recipe.title}"/>
+            </h5>
+            <p class="card-text" th:text="${recipe.description}"/>
+            <!--            <a href="#" class="btn btn-primary">Go somewhere</a>-->
+        </div>
+    </div>
+
+    <!--    <table>-->
+    <!--        <tr th:each="recipe : ${recipes}">-->
+    <!--            <td><a th:href="@{'/view/recipe/' + ${recipe.id}}" th:text="${recipe.title}"/></td>-->
+    <!--            <td th:text="${recipe.description}"/>-->
+    <!--            <td th:text="${recipe.cookingTime} + ' minutes'"/>-->
+    <!--            <td th:text="${recipe.servings} + ' servings'"/>-->
+    <!--            &lt;!&ndash;            <p th:text="${recipe}"/>&ndash;&gt;-->
+    <!--        </tr>-->
+    <!--    </table>-->
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<div th:replace="fragments/header :: header(page_title='Recipe Details')"></div>
+<body>
+<nav th:replace="fragments/header :: navbar"/>
+<div class="container col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" th:if="${recipe}">
+
+    <div class="card" style="width: 18rem;">
+        <!--        <img src="..." class="card-img-top" alt="...">-->
+        <div class="card-body">
+            <h5 class="card-title" th:text="${recipe.getTitle()}"/>
+            <div>
+                <i class="far fa-clock"></i> <span class="card-text" th:text="${recipe.getCookingTime()}"/>
+            </div>
+
+            <div>
+                <i class="fas fa-utensils"></i> <span class="card-text" th:text="${recipe.getServings()}"/>
+            </div>
+
+
+            <p class="card-text" th:text="${recipe.getDescription()}"/>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text="${recipe.getIngredients()}"/>
+            <li class="list-group-item" th:text="${recipe.getCookingInstructions()}"/>
+        </ul>
+        <div class="card-body">
+            <a th:href="@{'/view/recipe/edit/' + ${recipe.id}}" class="card-link">Edit</a>
+        </div>
+    </div>
+
+    <p>
+    <h3>Submitted by: </h3>
+    <div th:text="${recipe.getSubmittedBy()}"></div>
+    <div th:text="${recipe.getCreationTime()}"></div>
+    </p>
+
+    <p>
+    <h3>Last updated: </h3>
+    <div th:text="${recipe.getLastModified()}"></div>
+    </p>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
